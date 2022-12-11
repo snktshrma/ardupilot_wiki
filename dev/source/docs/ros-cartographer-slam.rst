@@ -97,6 +97,16 @@ Re-initialise the workspace with `wstool <http://wiki.ros.org/wstool>`__ then me
     wstool merge -t src https://raw.githubusercontent.com/googlecartographer/cartographer_ros/master/cartographer_ros.rosinstall
     wstool update -t src
 
+
+Edit the package.xml file in cartographer package
+
+::
+
+    cd $HOME/catkin_ws/src/cartographer
+    gedit package.xml
+    # modify line 46 and remove(or comment) the following:
+    <depend>libabsl-dev</depend>
+
 Install proto3 and deb dependencies
 
 ::
@@ -142,8 +152,8 @@ Copy-paste the contents below into the file
                 type="cartographer_node"
                 args="-configuration_directory $(find cartographer_ros)/configuration_files -configuration_basename cartographer.lua"
                 output="screen">
-                <remap from="odom" to "/mavros/local_position/odom" />
-                <remap from="imu" to "/mavros/imu/data" />
+                <remap from="odom" to="/mavros/local_position/odom" />
+                <remap from="imu" to="/mavros/imu/data" />
           </node>
           <node name="cartographer_occupancy_grid_node"
                 pkg="cartographer_ros"
